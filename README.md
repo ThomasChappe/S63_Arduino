@@ -1,5 +1,34 @@
 # S63_Arduino : Ressusciter un téléphone à cadran S63 avec un Arduino et un player MP3
 
+Table des matières
+==================
+
+   * [introduction](#introduction)
+   * [la mission : un téléphone musical qui vous joue un tube de votre année de naissance !](#la-mission--un-téléphone-musical-qui-vous-joue-un-tube-de-votre-année-de-naissance-)
+   * [mission (im)possible ?](#mission-impossible-)
+   * [commençons par le facile : la lecture de fichiers MP3](#commençons-par-le-facile--la-lecture-de-fichiers-mp3)
+   * [plus compliqué, le S63](#plus-compliqué-le-s63)
+   * [ça se complique encore (et on s'émerveille <g-emoji class="g-emoji" alias="sparkles" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png">✨</g-emoji>) avec le cadran](#ça-se-complique-encore-et-on-sémerveille-sparkles-avec-le-cadran)
+* [des fils, des connexions, un peu de code et la magie prend forme](#des-fils-des-connexions-un-peu-de-code-et-la-magie-prend-forme)
+   * [plan de connexion](#plan-de-connexion)
+* [le code, justement](#le-code-justement)
+   * [spécifications / comportement attendu](#spécifications--comportement-attendu)
+   * [plus de détails sur le code ?](#plus-de-détails-sur-le-code-)
+* [la carte micro SD et le module MP3](#la-carte-micro-sd-et-le-module-mp3)
+   * [adaptation à notre cas d'usage](#adaptation-à-notre-cas-dusage)
+   * [et les tonalités ?](#et-les-tonalités-)
+      * [copyright ?](#copyright-)
+* [c'est bien beau, ça marche, mais c'est pas pratique pour tout mettre dans le S63](#cest-bien-beau-ça-marche-mais-cest-pas-pratique-pour-tout-mettre-dans-le-s63)
+* [un shield ?](#un-shield-)
+   * [comment on fait un shield ?](#comment-on-fait-un-shield-)
+   * [je peux en avoir un ?](#je-peux-en-avoir-un-)
+* [et alors, ça fait quoi à la fin ?](#et-alors-ça-fait-quoi-à-la-fin-)
+   * [et pour le mettre dans le S63 ?](#et-pour-le-mettre-dans-le-s63-)
+* [responsabilités](#responsabilités)
+* [envie d'aller plus loin ?](#envie-daller-plus-loin-)
+* [Remerciements et références](#remerciements-et-références)
+
+
 
 ## introduction 
 
