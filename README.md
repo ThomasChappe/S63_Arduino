@@ -24,6 +24,12 @@ Table des matières
    * [je peux en avoir un ?](#je-peux-en-avoir-un-)
 * [et alors, ça fait quoi à la fin ?](#et-alors-ça-fait-quoi-à-la-fin-)
    * [et pour le mettre dans le S63 ?](#et-pour-le-mettre-dans-le-s63-)
+* [On va plus loin ? On peut le faire sonner ?](#on-va-plus-loin--on-peut-le-faire-sonner-)
+   * [un solénoïde ?](#un-solénoïde-)
+   * [pilotage du solénoïde avec l'Arduino](#pilotage-du-solénoïde-avec-larduino)
+   * [et du coup, coté shield, ca donne quoi ?](#et-du-coup-coté-shield-ca-donne-quoi-)
+   * [et coté code et comportement attendu ?](#et-coté-code-et-comportement-attendu-)
+   * [donc il faut ajouter une chanson dans la carte SD](#donc-il-faut-ajouter-une-chanson-dans-la-carte-sd)
 * [responsabilités](#responsabilités)
 * [envie d'aller plus loin ?](#envie-daller-plus-loin-)
 * [Remerciements et références](#remerciements-et-références)
@@ -349,6 +355,86 @@ Pensez à acheter un adaptateur 230v-9v pour Arduino, afin de l'alimenter direct
 Et mettez votre montage (Arduino + shield) dans un emballage antistatique (en général les Arduino sont vendus emballés dedans) afin de ne pas faire de court-circuit avec l'intérieur du S63.
 
 
+
+
+## On va plus loin ? On peut le faire sonner ?
+
+Oui ! :smiley:
+
+Dans la version 2.0.0 du code, une partie **optionnelle** a été ajoutée, ainsi qu'un shield approprié [version 2.5.0](./shield/socotel_arduino_shield_gerber%20(with%20bells)%20v2.5.0.zip) pour faire sonner le S63.
+
+J'ai bien dit **optionnelle** : tout ce qui est décrit avant fonctionnera parfaitement avec la dernière version du code ou du shield, même si vous ne mettez pas en place les élément décrits ci-dessous et que vous ne voulez pas faire sonner le téléphone.
+
+J'ai pris l'initiative de ne PAS utiliser le moteur et le carillon d'origine du téléphone, car il fonctionne en 48V (d'après les informations que je trouve sur le net...) et que je n'avais pas envie de gérer un transformateur électrique (cout, encombrement...), ou pire, faire entrer du 230V dans le téléphone.
+
+Du coup, un collègue (:wave: Yann G, si tu me lis !) m'a soufflé une excellente idée : utiliser des solénoïdes !
+
+C'est un peu dommage car on ne réutilise pas l'existant, mais c'est beaucoup plus sûr que de jouer avec le courant !
+
+### un solénoïde ? 
+
+Oui, des solénoïdes ! Ces petites bobines qui font se déplacer un percuteur ! 
+Une photo (merci AliExpress !) vaut mieux qu'un long discours : 
+![solenoid](./docs/solenoid.png)
+
+Du coup, il suffit d'en placer un à coté de chacune des cloches du téléphone, de les fixer à la distance adéquate avec un pistolet à colle et le tour est joué... ou presque ! Il faut les piloter avec l'Arduino maintenant !
+
+### pilotage du solénoïde avec l'Arduino
+
+Un solénoïde (une bobine), ça consomme pas mal de courant. Et donc les pattes des Arduino, avec leurs 50mA maximum, ça va pas suffire.
+
+Du coup, il faut brancher le solénoïde directement sur le +5V de l'Arduino (qui fournit beaucoup plus de courant et est directement relié à l'alimentation de l'Arduino). Oui, mais là... on ne le pilote plus !
+
+C'est là qu'arrive encore un nouvel ami électronique : le transistor ! 
+
+Dans notre cas, il va servir d'interrupteur. Je ne rentre pas dans les détails (d'ailleurs, je ne maitrise pas tout !) mais en gros, si on envoie du courant sur la base (B) d'un transistor, alors entre l'émetteur (E) et le collecteur (C), le courant passe. 
+
+Un transistor, cela a donc 3 pattes, et ça ressemble à ça : 
+![transistor](./docs/transistor.png)
+
+Parfait ! Il suffit alors de brancher la base sur une patte de notre Arduino, et de faire un circuit électrique entre le +5V, le solenoïde, et le transistor pour pouvoir programmer tout ça !
+
+Bon il faut une résistance et une diode en plus, pour des histoires de spécifications et de retour de courant, mais c'est des détails (ou pas, ça peut griller votre Arduino si vous les mettez pas...).
+
+### et du coup, coté shield, ca donne quoi ?
+
+Comme dit précédemment : ces composants sont **optionnels** et ne servent **que** pour faire sonner le téléphone.
+
+Partez de la [version 2.5.0 du shield](./shield/socotel_arduino_shield_gerber%20(with%20bells)%20v2.5.0.zip) pour avoir tous les circuits nécessaires. 
+
+Concernant les pièces à ajouter et souder pour que cela sonne, il vous faudra : 
+  - 2 résistances de 1k&ohm;
+  - 2 diodes 1N4004
+  - 2 transistor TIP102
+  - 2 solénoïdes 5V [exemple ici](https://www.aliexpress.com/item/32801392552.html)
+
+
+Et le montage complet, concrètement, c'est ça : 
+![wiring 2.5.0](./docs/wiring_2.5.0.jpg)
+
+### et coté code et comportement attendu ?
+
+J'ai ajouté un comportement supplémentaire dans le code : 
+- si on compose un numéro spécial (par défaut c'est le 0666 :metal:)
+	- le téléphone joue MP3 spécial (pour indiquer à l'utilisateur que la consigne est bien reçue). 
+	- Lorsque le téléphone est raccroché, alors il attend un délai (paramétrable), 
+	- puis... il sonne !
+- Lorsque vous décrochez, il reprend son fonctionnement normal : tonalité habituelle, attente de la numérotation d'une année.
+- Si vous ne décrochez pas, il s'arrête de sonner après un nombre de sonneries paramétrable dans le code.
+
+**Petit bonus** : Bien évidemment, j'ai à nouveau récupéré les spécifications et durées des sonneries d'époque, et ce sont donc les durées d'origine (et leur nombre) qui sont utilisées par défaut dans le code ! Vous allez voir (ou entendre plutôt !), ça rappelle des souvenirs de l'entendre sonner !
+
+### donc il faut ajouter une chanson dans la carte SD
+
+Oui, un fichier MP3 de votre choix pour que le téléphone vous indique que votre appel au numéro spécial a bien été pris en compte.
+
+Comme expliqué précédemment, les tonalités sont dans le dossier spécial ["MP3"](./microSD_content/MP3).
+
+Il faut donc y ajouter un fichier : 
+- 0006.mp3 => son de prise en compte de demande d'appel / sonnerie
+
+
+
 ## responsabilités 
 
 Je suis un bricoleur / bidouilleur / geek / passionné, mais je ne suis pas un professionnel de l'électricité ni de l'électronique. Il est donc possible qu'il y ait des imperfections ou défauts dans toute cette expérimentation. Il est également possible que les modules utilisés soient défaillants ou fonctionnent de manière inattendue. 
@@ -364,8 +450,8 @@ Je me suis arrêté là pour cette expérimentation, qui me semble déjà bien c
 
 Cependant, j'avais encore quelques idées, peut-être que j'y reviendrai plus tard, mais en attendant, s'il y a des personnes qui veulent reprendre le flambeau, les voici : 
   - remplacer les mp3 de tonalité par des appels à la fonction [tone de l'Arduino](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/)
-  - brancher la sonnerie du téléphone (voir ce que fait [revolunet](http://github.com/revolunet/s63 "@revolunet") à ce sujet) mais c'est assez dangereux (230v etc...)
-    - inventer un cas d'usage où il serait intéressant de la faire sonner, aussi...
+  - <del>brancher la sonnerie du téléphone (voir ce que fait [revolunet](http://github.com/revolunet/s63 "@revolunet") à ce sujet) mais c'est assez dangereux (230v etc...)</del> Voir juste au dessus ! [On va plus loin ? On peut le faire sonner ?](#on-va-plus-loin--on-peut-le-faire-sonner-)
+    - inventer un cas d'usage où il serait intéressant de le faire sonner, aussi...
   - remplacer l'Arduino par un ESP8266 pour permettre une connectivité wifi et ouvrir une toute autre dimension (pilotage d'API sur internet, modifier/ajouter des mp3 sur la carte microSD à distance, IoT, allumer la lumière, communiquer à plusieurs téléphones, voire communication VoWifi ?). 
     - cela nécessite certainement de revoir le shield car les pattes des ESP8266 sont différentes de celles de l'Arduino...
   - Adapter la fiche T du téléphone pour alimenter le circuit directement avec cette prise ou à défaut, la couper et réutiliser le fil, pour éviter d'ajouter un fil qui sort du S63 pour l'alimenter.
