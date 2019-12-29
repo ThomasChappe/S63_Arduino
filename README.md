@@ -25,6 +25,11 @@ Table des matières
 * [et alors, ça fait quoi à la fin ?](#et-alors-ça-fait-quoi-à-la-fin-)
    * [et pour le mettre dans le S63 ?](#et-pour-le-mettre-dans-le-s63-)
 * [On va plus loin ? On peut le faire sonner ?](#on-va-plus-loin--on-peut-le-faire-sonner-)
+   * [un solénoïde ?](#un-solénoïde-)
+   * [pilotage du solénoïde avec l'Arduino](#pilotage-du-solénoïde-avec-larduino)
+   * [et du coup, coté shield, ca donne quoi ?](#et-du-coup-coté-shield-ca-donne-quoi-)
+   * [et coté code et comportement attendu ?](#et-coté-code-et-comportement-attendu-)
+   * [donc il faut ajouter une chanson dans la carte SD](#donc-il-faut-ajouter-une-chanson-dans-la-carte-sd)
 * [responsabilités](#responsabilités)
 * [envie d'aller plus loin ?](#envie-daller-plus-loin-)
 * [Remerciements et références](#remerciements-et-références)
@@ -369,7 +374,7 @@ C'est un peu dommage car on ne réutilise pas l'existant, mais c'est beaucoup pl
 ### un solénoïde ? 
 
 Oui, des solénoïdes ! Ces petites bobines qui font se déplacer un percuteur ! 
-Une photo vaut mieux qu'un long discours : 
+Une photo (merci AliExpress !) vaut mieux qu'un long discours : 
 ![solenoid](./docs/solenoid.png)
 
 Du coup, il suffit d'en placer un à coté de chacune des cloches du téléphone, de les fixer à la distance adéquate avec un pistolet à colle et le tour est joué... ou presque ! Il faut les piloter avec l'Arduino maintenant !
