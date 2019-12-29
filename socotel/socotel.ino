@@ -25,6 +25,7 @@
  *
  *  - optional Solenoid (x2) to have the bells ringing
  *    https://www.aliexpress.com/item/32801392552.html
+ *    and to have them working and managed by the Arduino, 2 NPN transistors (TIP102) used as switches.
  * 
  *  software library required for MP3 player :
  *  https://github.com/DFRobot/DFRobotDFPlayerMini/
