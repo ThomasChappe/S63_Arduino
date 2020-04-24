@@ -4,12 +4,12 @@
  *  @file socotel.ino
  *  @brief play a random MP3 song of the year your dialed on the S63
  *
- *  @copyright  [Thomas CHAPPE](https://github.com/ThomasChappe), 2019
+ *  @copyright  [Thomas CHAPPE](https://github.com/ThomasChappe), 2020
  *  @copyright  GNU General Public License v3.0
  *
  *  @author    [Thomas CHAPPE](https://github.com/ThomasChappe)
- *  @version   2.0.0
- *  @date      2019-12-29
+ *  @version   2.1.0
+ *  @date      2020-04-24
  *  
  *  All the documentation for this code is available here : 
  *  https://github.com/ThomasChappe/S63_Arduino/
@@ -77,6 +77,17 @@ const unsigned int gc_bell_ring_period = 17; // the bells ring one after the oth
 const String gc_self_call_number = "0666"; // the number to dial, to have the phone ring
 const unsigned int gc_delay_before_call = 2000; // delay after having self dialed and hanged up, before the phone rings (in ms).
 
+// version 2.1
+// rotaring can require debounce, but a small one seems to do the job
+// if after dialing 4 numbers your phone stay quiet, then finaly play the "occupied" tone, then maybe you should increase this value.
+const unsigned short gc_rotaringDebounce = 10; 
+
+// some old phone seems to slow down (?) the digits pulses
+// adding some extra pulse time can help (or you can clean up the phone speed regulator, for example add some oil into the cage)
+// /!\ never go over 25 for this constant, not to miss pulses.
+const unsigned short gc_extraPulseTime = 20; 
+
+
 /*****
 ****** END OF CUSTOMIZABLE SECTION, DO NOT CHANGE ANYTHING BELOW THIS LINE 
 ******/
@@ -120,7 +131,7 @@ DFRobotDFPlayerMini g_MP3Player;
 bool g_incomingCall = false;  
 
 // phone and dial constants
-const unsigned int gc_pulseInterval = 66; // ms lasting of dialing pulses (see rotary specs)
+const unsigned int gc_pulseInterval = 66 + gc_extraPulseTime; // ms lasting of dialing pulses (see rotary specs)
 
 // debounce, rotary pulse detection and digit composed (use interruptions)
 volatile unsigned long g_dialTime = 0;
@@ -157,8 +168,16 @@ void addDigitToComposedNumber(String & p_composedNumber)
 */
 bool isRotaring()
 {
+  // introduce debounce for rotaring detection, since some phones had problems.
+  int l_rotaringPinStatus;
+  do 
+  {
+    l_rotaringPinStatus = digitalRead(gc_rotaringPin);
+    delay (gc_rotaringDebounce);
+  } while ( l_rotaringPinStatus != digitalRead(gc_rotaringPin) );
+
   // if pin is HIGH, since we are in pullup mode => not rotaring
-  return digitalRead(gc_rotaringPin) == LOW;
+  return l_rotaringPinStatus == LOW;
 }
 
 
@@ -556,4 +575,3 @@ void loop()
     }
   }
 }
-
