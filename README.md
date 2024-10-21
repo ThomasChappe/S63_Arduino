@@ -34,7 +34,7 @@ Table des matières
 * [envie d'aller plus loin ?](#envie-daller-plus-loin-)
 * [Remerciements et références](#remerciements-et-références)
 * [Questions / Réponses / Divers](#questions--r%C3%A9ponses--divers)
-   *[à quoi sert le 4e fil du cadran ?](#a-quoi-sert-le-4e-fil-du-cadran-)
+   * [à quoi sert le 4e fil du cadran ?](#a-quoi-sert-le-4e-fil-du-cadran-)
 
 
 ## introduction 
