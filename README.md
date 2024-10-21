@@ -32,9 +32,9 @@ Table des matières
    * [donc il faut ajouter une chanson dans la carte SD](#donc-il-faut-ajouter-une-chanson-dans-la-carte-sd)
 * [responsabilités](#responsabilités)
 * [envie d'aller plus loin ?](#envie-daller-plus-loin-)
-* [Remerciements et références](#remerciements-et-références)
 * [Questions / Réponses / Divers](#questions--r%C3%A9ponses--divers)
    * [A quoi sert le 4e fil du cadran ?](#à-quoi-sert-le-4e-fil-du-cadran-)
+* [Remerciements et références](#remerciements-et-références)
 
 
 ## introduction 
