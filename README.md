@@ -33,7 +33,8 @@ Table des matières
 * [responsabilités](#responsabilités)
 * [envie d'aller plus loin ?](#envie-daller-plus-loin-)
 * [Remerciements et références](#remerciements-et-références)
-
+* [Questions / Réponses / Divers](#questions--r%C3%A9ponses--divers)
+   *[à quoi sert le 4e fil du cadran ?](#a-quoi-sert-le-4e-fil-du-cadran-)
 
 
 ## introduction 
@@ -455,17 +456,22 @@ Cependant, j'avais encore quelques idées, peut-être que j'y reviendrai plus ta
   - remplacer l'Arduino par un ESP8266 pour permettre une connectivité wifi et ouvrir une toute autre dimension (pilotage d'API sur internet, modifier/ajouter des mp3 sur la carte microSD à distance, IoT, allumer la lumière, communiquer à plusieurs téléphones, voire communication VoWifi ?). 
     - cela nécessite certainement de revoir le shield car les pattes des ESP8266 sont différentes de celles de l'Arduino...
   - Adapter la fiche T du téléphone pour alimenter le circuit directement avec cette prise ou à défaut, la couper et réutiliser le fil, pour éviter d'ajouter un fil qui sort du S63 pour l'alimenter.
-  - trouver à quoi sert le 4e fil du cadran
+  - <del>trouver à quoi sert le 4e fil du cadran</del> voir ci dessous [A quoi sert le 4e fil du cadran ?](#a-quoi-sert-le-4e-fil-du-cadran-)
   - ajouter une prise jack pour pouvoir connecter une enceinte et transformer le téléphone en player mp3, avec un code alternatif :
     - stocker des playlist dans les dossiers
     - lorsqu'on compose un numéro (1 ou 2 chiffres), cela joue la playlist (tout les mp3 du dossier numéroté).
 
+
+## Questions / Réponses / Divers
+### à quoi sert le 4e fil du cadran ?
+"Son rôle est de shunter la sonnerie pour éviter les tintements de celle-ci lors de la numérotation. La sonnerie est alimentée normalement par du 80v alternatif envoyé par le central (c'était du 110v dans les premiers centraux). Le condensateur en entrée bloque le 48v continu fourni par la ligne et laisse passer le courant d'appel. Lors de la numérotation, l'ouverture/fermeture de la ligne par le cadran passe le condensateur et fait tinter la sonnerie. Le shunt permet d'éviter ça. Celui-ci est d'ailleurs déporté au niveau du conjoncteur par le fil rouge (borne 17 sur le S63 de mémoire) pour la sonnerie extérieure et via le câblage la sonnerie des autres postes montés en parallèle s'il y en a." [Jacques-F](https://github.com/ThomasChappe/S63_Arduino/issues/2#issuecomment-2427249708)
 
 ## Remerciements et références
 
   - [Cyril Jovet](https://github.com/sun-exploit "Cyril Jovet") évidemment, sans qui je n'aurais jamais découvert l'idée d'adapter un S63
   - [@revolunet](https://github.com/revolunet "@revolunet") pour l'idée originale et la documentation (schémas, images) sur son github
   - [@DFRobot](https://github.com/DFRobot/DFRobotDFPlayerMini/) pour sa bibliothèque de prise en charge du player MP3.
+  - [Jacques-F](https://github.com/ThomasChappe/S63_Arduino/issues/2#issuecomment-2427249708)
   - http://jla.1313-blog.overblog.com/ : énorme base documentaire, découvertes et expérimentations qui m'ont passionné et bien aidé !
   - https://www.orange.com/fr/content/download/3635/33162/version/1/file/STI03-ed4_0505.pdf : toutes les spécifications des tonalités de l'époque !
 
