@@ -471,7 +471,7 @@ Cependant, j'avais encore quelques idées, peut-être que j'y reviendrai plus ta
   - [Cyril Jovet](https://github.com/sun-exploit "Cyril Jovet") évidemment, sans qui je n'aurais jamais découvert l'idée d'adapter un S63
   - [@revolunet](https://github.com/revolunet "@revolunet") pour l'idée originale et la documentation (schémas, images) sur son github
   - [@DFRobot](https://github.com/DFRobot/DFRobotDFPlayerMini/) pour sa bibliothèque de prise en charge du player MP3.
-  - [Jacques-F](https://github.com/ThomasChappe/S63_Arduino/issues/2#issuecomment-2427249708)
+  - [Jacques-F](https://github.com/ThomasChappe/S63_Arduino/issues/2#issuecomment-2427249708) pour sa réponse à l'utilité du 4e fil du cadran.
   - http://jla.1313-blog.overblog.com/ : énorme base documentaire, découvertes et expérimentations qui m'ont passionné et bien aidé !
   - https://www.orange.com/fr/content/download/3635/33162/version/1/file/STI03-ed4_0505.pdf : toutes les spécifications des tonalités de l'époque !
 
