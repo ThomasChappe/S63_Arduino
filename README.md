@@ -34,7 +34,7 @@ Table des matières
 * [envie d'aller plus loin ?](#envie-daller-plus-loin-)
 * [Remerciements et références](#remerciements-et-références)
 * [Questions / Réponses / Divers](#questions--r%C3%A9ponses--divers)
-   * [à quoi sert le 4e fil du cadran ?](#a-quoi-sert-le-4e-fil-du-cadran-)
+   * [A quoi sert le 4e fil du cadran ?](#à-quoi-sert-le-4e-fil-du-cadran-)
 
 
 ## introduction 
@@ -456,7 +456,7 @@ Cependant, j'avais encore quelques idées, peut-être que j'y reviendrai plus ta
   - remplacer l'Arduino par un ESP8266 pour permettre une connectivité wifi et ouvrir une toute autre dimension (pilotage d'API sur internet, modifier/ajouter des mp3 sur la carte microSD à distance, IoT, allumer la lumière, communiquer à plusieurs téléphones, voire communication VoWifi ?). 
     - cela nécessite certainement de revoir le shield car les pattes des ESP8266 sont différentes de celles de l'Arduino...
   - Adapter la fiche T du téléphone pour alimenter le circuit directement avec cette prise ou à défaut, la couper et réutiliser le fil, pour éviter d'ajouter un fil qui sort du S63 pour l'alimenter.
-  - <del>trouver à quoi sert le 4e fil du cadran</del> voir ci dessous [A quoi sert le 4e fil du cadran ?](#a-quoi-sert-le-4e-fil-du-cadran-)
+  - <del>trouver à quoi sert le 4e fil du cadran</del> voir ci dessous [A quoi sert le 4e fil du cadran ?](#à-quoi-sert-le-4e-fil-du-cadran-)
   - ajouter une prise jack pour pouvoir connecter une enceinte et transformer le téléphone en player mp3, avec un code alternatif :
     - stocker des playlist dans les dossiers
     - lorsqu'on compose un numéro (1 ou 2 chiffres), cela joue la playlist (tout les mp3 du dossier numéroté).
